@@ -33,7 +33,8 @@ model = genai.GenerativeModel(
 def generate_content(prompt):
     # This is where you would call your language model's API
     # For the purpose of this example, we'll just return the prompt
-    return f"Proofread text based on the given prompt:\n\n{prompt}"
+    response = model.generate_content(prompt)
+    return response.text
 
 # Define the proofreading rules
 rules = """
