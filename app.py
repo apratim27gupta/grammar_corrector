@@ -1,5 +1,6 @@
 import streamlit as st
 import os
+import time
 import google.generativeai as genai
 import json
 genai.configure(api_key=os.getenv("API_KEY"))
@@ -31,9 +32,14 @@ model = genai.GenerativeModel(
     )
 # Mock function for model's API call (replace with actual API call)
 def generate_content(prompt):
-    # This is where you would call your language model's API
-    # For the purpose of this example, we'll just return the prompt
-    response = model.generate_content(prompt)
+    m = 0
+    while m!=1:
+        try:
+            response = model.generate_content(prompt)
+            m = 1
+        except Exception as ee:
+            return 'Please retry after 100 seconds'
+    
     return response.text
 
 # Define the proofreading rules
